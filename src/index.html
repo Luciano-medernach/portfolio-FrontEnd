@@ -11,6 +11,7 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="index.css" />
     <script
       src="https://kit.fontawesome.com/86ee541acb.js"
       crossorigin="anonymous"
@@ -22,7 +23,7 @@
         <div class="container-fluid">
           <a class="navbar-brand" href="https://argentinaprograma.inti.gob.ar/">
             <img
-              src="./images/argentina-programa-logo.png"
+              src="../images/argentina-programa-logo.png"
               alt="Argentina Programa"
               width="30"
               height="24"
@@ -45,12 +46,12 @@
             >
               <i class="fa-brands fa-github"></i>
             </a>
-            <button type="button" class="btn btn-dark ms-4">Ingresar</button>
+            <a href="login.html" class="btn btn-dark ms-4">Ingresar</a>
           </div>
         </div>
       </nav>
       <img
-        src="./images/banner.jpg"
+        src="../images/banner.jpg"
         height="200"
         class="w-100"
         style="object-fit: cover"
@@ -59,7 +60,7 @@
     <main>
       <section class="position-relative">
         <img
-          src="./images/profile.jpg"
+          src="../images/profile.jpg"
           style="border-radius: 100%; left: 150px"
           height="150"
           width="150"
@@ -81,17 +82,12 @@
       <hr />
       <section>
         <h3 class="ms-5">Experiencia</h3>
-      </section>
-      <hr />
-
-      <section>
-        <h3 class="ms-5">Educacion</h3>
-        <div class="row px-5 pt-3">
+        <div class="row mx-5 mt-5">
           <div class="col card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
                 <img
-                  src="./images/cambridge.jpg"
+                  src="../images/cambridge.jpg"
                   class="img-fluid rounded-start"
                   alt="Cambridge"
                 />
@@ -112,32 +108,61 @@
       <hr />
 
       <section>
-        <h3 class="ms-5">Habilidades</h3>
-        <div class="ps-5 pt-3">
-          <p>CSS</p>
-          <div class="progress w-75">
-            <div
-              class="progress-bar progress-bar-striped progress-bar-animated"
-              role="progressbar"
-              aria-label="Animated striped example"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style="width: 75%"
-            ></div>
+        <h3 class="ms-5">Educacion</h3>
+        <div class="row mx-5 mt-5">
+          <div class="col card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="../images/cambridge.jpg"
+                  class="img-fluid rounded-start"
+                  alt="Cambridge"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Certificate in Advanced English</h5>
+                  <p class="card-text">
+                    Certificado en Ingles emitido por Cambridge para el nivel
+                    C1.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
       <hr />
 
       <section>
-        <h3 class="ms-5">Proyectos</h3>
-        <div class="row px-5 pt-3">
+        <h3 class="mx-5">Habilidades</h3>
+        <div class="row mx-5 pt-3">
+          <div class="col text-center">
+            <div class="progress-circle p-0 mx-auto">
+              <div class="progress-circle bg-red quarter-half"></div>
+              <div class="inner-circle bg-white fs-3 fw-semibold">75%</div>
+            </div>
+            <p class="mt-4 fs-4 fw-semibold">CSS</p>
+          </div>
+          <div class="col text-center">
+            <div class="progress-circle p-0 mx-auto">
+              <div class="progress-circle bg-yellow"></div>
+              <div class="inner-circle bg-white fs-3 fw-semibold">100%</div>
+            </div>
+            <p class="mt-4 fs-4 fw-semibold">JS</p>
+          </div>
+        </div>
+      </section>
+      <hr />
+
+      <section>
+        <h3 class="mx-5">Proyectos</h3>
+        <div class="row mx-5 mt-3">
           <div class="col card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
                 <img
-                  src="./images/MidnightRide.jpg"
+                  src="../images/MidnightRide.jpg"
                   class="img-fluid rounded-start"
                   alt="Cambridge"
                 />

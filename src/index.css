@@ -1,0 +1,44 @@
+.progress-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  position: relative;
+}
+
+.quarter {
+  clip-path: inset(0px 0px 75px 75px);
+}
+
+.half {
+  clip-path: inset(0px 0px 0px 75px);
+}
+
+.quarter-half {
+  clip-path: path("m 75 0 l 75 0 l 0 150 l -150 0 l 0 -75 l 75 0 l 0 -75");
+}
+
+.inner-circle {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 90%;
+  transform: translateY(5%) translateX(5%);
+  border-radius: 100%;
+  z-index: 2;
+}
+
+.bg-red {
+  background-color: var(--bs-red);
+}
+
+.bg-blue {
+  background-color: var(--bs-blue);
+}
+
+.bg-yellow {
+  background-color: var(--bs-yellow);
+}

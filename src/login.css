@@ -1,0 +1,24 @@
+.login-background {
+  background-image: url("../images/banner.jpg");
+  background-position: center;
+  background-size: cover;
+  filter: blur(4px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+}
+
+.bg-red {
+  background-color: var(--bs-red);
+}
+
+.bg-blue {
+  background-color: var(--bs-blue);
+}
+
+.bg-yellow {
+  background-color: var(--bs-yellow);
+}
