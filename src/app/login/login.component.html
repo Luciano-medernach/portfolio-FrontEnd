@@ -1,8 +1,18 @@
-<div class="login-background"></div>
 <main
-  class="h-100 d-flex align-items-center justify-content-center d-fixed top-0 left-0"
+  class="login-background d-flex position-relative vw-100 vh-100 align-items-center justify-content-center"
 >
+  <a
+    routerLink="/inicio"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+    class="position-absolute top-0 start-0 text-white fs-2 p-3"
+  >
+    <i class="fa-solid fa-arrow-left"></i>
+  </a>
+
   <form
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
     class="p-4 d-flex flex-column justify-content-center align-items-center bg-white rounded"
   >
     <div class="input-group flex-nowrap py-2" style="max-width: 300px">
@@ -13,8 +23,10 @@
         placeholder="Username"
         aria-label="Username"
         aria-describedby="addon-wrapping"
+        formControlName="user"
       />
     </div>
+
     <div class="input-group flex-nowrap" style="max-width: 300px">
       <span class="input-group-text" id="addon-wrapping">*</span>
       <input
@@ -23,7 +35,44 @@
         placeholder="Password"
         aria-label="Password"
         aria-describedby="addon-wrapping"
+        formControlName="password"
       />
     </div>
+
+    <div
+      *ngIf="user?.invalid && (user?.dirty || user?.touched)"
+      class="alert alert-danger fs-6 m-4"
+    >
+      <div *ngIf="user?.errors?.['required']">El usuario es requerido.</div>
+      <div *ngIf="user?.errors?.['minlength']">
+        El usuario debe tener al menos 6 caracteres.
+      </div>
+      <div *ngIf="user?.errors?.['maxlength']">
+        El usuario no puede tener mas de 14 caracteres.
+      </div>
+    </div>
+
+    <div
+      *ngIf="
+        user?.valid &&
+        password?.invalid &&
+        (password?.dirty || password?.touched)
+      "
+      class="alert alert-danger fs-6 m-4"
+    >
+      <div *ngIf="password?.errors?.['required']">
+        La contraseña es requerida.
+      </div>
+      <div *ngIf="password?.errors?.['minlength']">
+        La contraseña debe tener al menos 8 caracteres.
+      </div>
+      <div *ngIf="password?.errors?.['maxlength']">
+        La contraseña no puede tener mas de 64 caracteres.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!loginForm.valid" class="bg-white">
+      Ingresar
+    </button>
   </form>
 </main>
