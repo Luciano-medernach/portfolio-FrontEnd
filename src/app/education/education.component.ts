@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { EducationService } from '../services/education.service';
+import { Education } from '../shared/education.model';
 
 @Component({
   selector: 'app-education',
@@ -6,16 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./education.component.css'],
 })
 export class EducationComponent {
-  degrees = [
-    {
-      title: 'Certificate in Advanced English',
-      desc: 'Certificado en Ingles emitido por Cambridge para el nivel C1.',
-      image: 'assets/img/cambridge.jpg',
-    },
-    {
-      title: 'Javascript Profesional',
-      desc: 'Certificacion en javascript profesional emitida por Platzi.',
-      image: 'assets/img/cambridge.jpg',
-    },
-  ];
+  education: Array<Education> = [];
+
+  constructor(private educationService: EducationService) {}
+
+  getEducation() {
+    this.educationService
+      .getEducation()
+      .subscribe((data: Array<Education>) => (this.education = data));
+  }
+
+  ngOnInit() {
+    this.getEducation();
+  }
 }

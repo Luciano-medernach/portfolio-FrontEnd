@@ -1,4 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
+import { audit } from 'rxjs';
+import { ExperienceService } from '../services/experience.service';
+import { Experience } from '../shared/experience.model';
 
 @Component({
   selector: 'app-experience',
@@ -6,11 +15,89 @@ import { Component } from '@angular/core';
   styleUrls: ['./experience.component.css'],
 })
 export class ExperienceComponent {
-  jobs = [
-    {
-      title: 'Administrador de bienes y recursos tecnologicos.',
-      desc: 'Encargado de mantener un registro de salidas y entradas de distintos materiales necesarios para la elaboracion de proyectos en el establecimiento.',
-      image: 'assets/img/cambridge.jpg',
-    },
-  ];
+  constructor(private experienceService: ExperienceService) {}
+
+  experience: Array<Experience> = [];
+  warning = '';
+
+  state: String = 'add';
+
+  experienceForm = new FormGroup({
+    id: new FormControl<Number | null>(null),
+    title: new FormControl('', [Validators.required]),
+    description: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+    ]),
+    employer: new FormControl('', [Validators.required]),
+    date: new FormControl('', [Validators.required]),
+    image: new FormControl('', [Validators.required]),
+  });
+
+  clearModal() {
+    this.experienceForm.reset();
+    this.state = 'add';
+  }
+
+  setModal(exp: Experience) {
+    this.experienceForm.setValue(exp);
+    this.state = 'edit';
+  }
+
+  onSubmit() {
+    if (this.state == 'edit') {
+      this.editExperience();
+    } else {
+      this.saveExperience();
+    }
+  }
+
+  get title() {
+    return this.experienceForm.get('title');
+  }
+  get description() {
+    return this.experienceForm.get('description');
+  }
+  get date() {
+    return this.experienceForm.get('date');
+  }
+  get employer() {
+    return this.experienceForm.get('employer');
+  }
+  get image() {
+    return this.experienceForm.get('image');
+  }
+
+  getExperience() {
+    this.experienceService
+      .getExperience()
+      .subscribe((data: Array<Experience>) => (this.experience = data));
+  }
+
+  saveExperience() {
+    const exp: any = this.experienceForm.value;
+    delete exp['id'];
+
+    this.experienceService
+      .saveExperience(exp)
+      .subscribe((data: any) => this.experience.push(data));
+  }
+
+  editExperience() {
+    const exp: any = this.experienceForm.value;
+
+    this.experienceService.editExperience(exp).subscribe(() => {
+      this.getExperience();
+    });
+  }
+
+  deleteExperience(id: any) {
+    this.experienceService.deleteExperience(id).subscribe(() => {
+      this.getExperience();
+    });
+  }
+
+  ngOnInit() {
+    this.getExperience();
+  }
 }

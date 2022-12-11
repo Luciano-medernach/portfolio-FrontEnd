@@ -8,13 +8,14 @@
     >
       <div class="row g-0">
         <div class="col-md-4">
-          <img [src]="proyect.image" class="img-fluid rounded-start" />
+          <img class="img-fluid rounded-start" />
+          <!-- [src]="proyect.image" -->
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">{{ proyect.title }}</h5>
             <span class="badge bg-secondary">{{ proyect.date }}</span>
-            <p class="card-text">{{ proyect.desc }}</p>
+            <p class="card-text">{{ proyect.description }}</p>
           </div>
         </div>
       </div>

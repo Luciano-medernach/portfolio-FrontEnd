@@ -4,17 +4,17 @@
     <div
       class="col card mb-3"
       style="max-width: 540px"
-      *ngFor="let degree of degrees"
+      *ngFor="let educ of education"
     >
       <div class="row g-0">
         <div class="col-md-4">
-          <img [src]="degree.image" class="img-fluid rounded-start" />
+          <img [src]="educ.image" class="img-fluid rounded-start" />
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">{{ degree.title }}</h5>
+            <h5 class="card-title">{{ educ.title }}</h5>
             <p class="card-text">
-              {{ degree.desc }}
+              {{ educ.description }}
             </p>
           </div>
         </div>

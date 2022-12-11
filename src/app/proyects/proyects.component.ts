@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ProyectService } from '../services/proyect.service';
+import { Proyect } from '../shared/proyect.model';
 
 @Component({
   selector: 'app-proyects',
@@ -6,12 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./proyects.component.css'],
 })
 export class ProyectsComponent {
-  proyects = [
-    {
-      title: 'Midnight Ride',
-      desc: 'Juego RPG de terror creado en Unity.',
-      date: 'Abril 2022 - Noviembre 2022',
-      image: 'assets/img/MidnightRide.jpg',
-    },
-  ];
+  proyects: Array<Proyect> = [];
+
+  constructor(private proyectService: ProyectService) {}
+
+  getProyects() {
+    this.proyectService
+      .getProyects()
+      .subscribe((data: Array<Proyect>) => (this.proyects = data));
+  }
+
+  ngOnInit() {
+    this.getProyects();
+  }
 }

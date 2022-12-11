@@ -4,21 +4,145 @@
     <div
       class="col card mb-3"
       style="max-width: 540px"
-      *ngFor="let job of jobs"
+      *ngFor="let exp of experience"
     >
+      <button (click)="deleteExperience(exp.id)">Eliminar</button>
+      <button
+        data-bs-toggle="modal"
+        data-bs-target="#experienceModal"
+        (click)="setModal(exp)"
+      >
+        Editar
+      </button>
       <div class="row g-0">
         <div class="col-md-4">
-          <img [src]="job.image" class="img-fluid rounded-start" />
+          <img [src]="exp.image" class="img-fluid rounded-start" />
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">{{ job.title }}</h5>
+            <h5 class="card-title">{{ exp.title }}</h5>
             <p class="card-text">
-              {{ job.desc }}
+              {{ exp.description }}
             </p>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#experienceModal"
+    (click)="clearModal()"
+  >
+    Añadir
+  </button>
 </section>
+
+<form
+  [formGroup]="experienceForm"
+  (ngSubmit)="onSubmit()"
+  class="modal"
+  id="experienceModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="state === 'add'" class="modal-title">Agregar experiencia</h5>
+        <h5 *ngIf="state === 'edit'" class="modal-title">Editar experiencia</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="title" class="form-label">Titulo</label>
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            aria-label="title"
+            id="title"
+            placeholder="Titulo"
+            formControlName="title"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Descripcion</label>
+          <textarea
+            type="text"
+            class="form-control"
+            name="description"
+            aria-label="description"
+            id="description"
+            placeholder="Descripcion"
+            formControlName="description"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="employer" class="form-label">Empleador</label>
+          <input
+            type="text"
+            class="form-control"
+            name="employer"
+            aria-label="employer"
+            id="employer"
+            placeholder="Empleador"
+            formControlName="employer"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Fecha</label>
+          <input
+            type="number"
+            class="form-control"
+            name="date"
+            aria-label="date"
+            id="date"
+            min="1900"
+            max="2100"
+            formControlName="date"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Imagen</label>
+          <input
+            type="text"
+            class="form-control"
+            name="image"
+            aria-label="image"
+            id="image"
+            formControlName="image"
+            placeholder="Imagen"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button
+          *ngIf="state === 'add'"
+          type="submit"
+          [disabled]="!experienceForm.valid"
+          class="btn btn-primary"
+        >
+          Agregar
+        </button>
+        <button
+          *ngIf="state === 'edit'"
+          type="submit"
+          [disabled]="!experienceForm.valid"
+          class="btn btn-primary"
+        >
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
