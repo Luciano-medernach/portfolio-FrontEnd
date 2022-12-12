@@ -1,4 +1,5 @@
 export interface Education {
+  id: Number;
   title: String;
   institution: String;
   date: any;

@@ -6,13 +6,104 @@
     width="150"
     class="position-absolute top-0 translate-middle"
   />
-  <div class="p-5 row" *ngIf="information">
+  <div class="p-5 row" *ngIf="person">
     <div class="pt-5 col">
-      <h2>{{ information.name }} {{ information.lastname }}</h2>
-      <p>{{ information.title }}</p>
+      <h2>{{ person.name }} {{ person.lastname }}</h2>
+      <p>{{ person.title }}</p>
     </div>
     <div class="pt-5 col">
-      <p>Bla bla</p>
+      <p>{{ person.info }}</p>
     </div>
   </div>
+  <button
+    data-bs-toggle="modal"
+    data-bs-target="#personModal"
+    (click)="setModal(person)"
+  >
+    Editar
+  </button>
 </section>
+
+<form
+  [formGroup]="personForm"
+  (ngSubmit)="editPerson()"
+  class="modal"
+  id="personModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar persona</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            aria-label="name"
+            id="name"
+            placeholder="Nombre"
+            formControlName="name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="lastname" class="form-label">Apellido</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastname"
+            aria-label="lastname"
+            id="lastname"
+            placeholder="Apellido"
+            formControlName="lastname"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="title" class="form-label">Titulo</label>
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            aria-label="title"
+            id="title"
+            placeholder="Titulo"
+            formControlName="title"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="info" class="form-label">Informacion</label>
+          <textarea
+            type="text"
+            class="form-control"
+            name="info"
+            aria-label="info"
+            id="info"
+            placeholder="Informacion"
+            formControlName="info"
+          ></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button
+          type="submit"
+          [disabled]="!personForm.valid"
+          class="btn btn-primary"
+        >
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -23,6 +23,12 @@ export class PersonService {
       .pipe(catchError(this.handleError));
   }
 
+  editPerson(person: Person) {
+    return this.http
+      .put('http://localhost:8080/person/edit/' + person.id, person)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

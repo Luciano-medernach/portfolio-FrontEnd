@@ -34,6 +34,22 @@ export class ExperienceComponent {
     image: new FormControl('', [Validators.required]),
   });
 
+  get title() {
+    return this.experienceForm.get('title');
+  }
+  get description() {
+    return this.experienceForm.get('description');
+  }
+  get date() {
+    return this.experienceForm.get('date');
+  }
+  get employer() {
+    return this.experienceForm.get('employer');
+  }
+  get image() {
+    return this.experienceForm.get('image');
+  }
+
   clearModal() {
     this.experienceForm.reset();
     this.state = 'add';
@@ -50,22 +66,6 @@ export class ExperienceComponent {
     } else {
       this.saveExperience();
     }
-  }
-
-  get title() {
-    return this.experienceForm.get('title');
-  }
-  get description() {
-    return this.experienceForm.get('description');
-  }
-  get date() {
-    return this.experienceForm.get('date');
-  }
-  get employer() {
-    return this.experienceForm.get('employer');
-  }
-  get image() {
-    return this.experienceForm.get('image');
   }
 
   getExperience() {

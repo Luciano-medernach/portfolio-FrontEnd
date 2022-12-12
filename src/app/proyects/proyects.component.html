@@ -6,6 +6,14 @@
       style="max-width: 540px"
       *ngFor="let proyect of proyects"
     >
+      <button (click)="deleteProyect(proyect.id)">Eliminar</button>
+      <button
+        data-bs-toggle="modal"
+        data-bs-target="#proyectModal"
+        (click)="setModal(proyect)"
+      >
+        Editar
+      </button>
       <div class="row g-0">
         <div class="col-md-4">
           <img class="img-fluid rounded-start" />
@@ -21,4 +29,98 @@
       </div>
     </div>
   </div>
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#proyectModal"
+    (click)="clearModal()"
+  >
+    Añadir
+  </button>
 </section>
+
+<form
+  [formGroup]="proyectForm"
+  (ngSubmit)="onSubmit()"
+  class="modal"
+  id="proyectModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="state === 'add'" class="modal-title">Agregar proyecto</h5>
+        <h5 *ngIf="state === 'edit'" class="modal-title">Editar proyecto</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="title" class="form-label">Titulo</label>
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            aria-label="title"
+            id="title"
+            placeholder="Titulo"
+            formControlName="title"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Descripcion</label>
+          <textarea
+            type="text"
+            class="form-control"
+            name="description"
+            aria-label="description"
+            id="description"
+            placeholder="Descripcion"
+            formControlName="description"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Fecha</label>
+          <input
+            type="number"
+            class="form-control"
+            name="date"
+            aria-label="date"
+            id="date"
+            min="1900"
+            max="2100"
+            step="1"
+            value="2000"
+            formControlName="date"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button
+          *ngIf="state === 'add'"
+          type="submit"
+          [disabled]="!proyectForm.valid"
+          class="btn btn-primary"
+        >
+          Agregar
+        </button>
+        <button
+          *ngIf="state === 'edit'"
+          type="submit"
+          [disabled]="!proyectForm.valid"
+          class="btn btn-primary"
+        >
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

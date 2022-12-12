@@ -15,6 +15,26 @@ export class ProyectService {
       .pipe(catchError(this.handleError));
   }
 
+  saveProyect(proyect: Proyect) {
+    return this.http
+      .post<Proyect>('http://localhost:8080/proyects/save', proyect)
+      .pipe(catchError(this.handleError));
+  }
+
+  editProyect(proyect: Proyect) {
+    return this.http
+      .put('http://localhost:8080/proyects/edit/' + proyect.id, proyect)
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteProyect(id: any) {
+    return this.http
+      .delete('http://localhost:8080/proyects/delete/' + id, {
+        responseType: 'text',
+      })
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

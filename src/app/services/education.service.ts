@@ -15,6 +15,26 @@ export class EducationService {
       .pipe(catchError(this.handleError));
   }
 
+  saveEducation(education: Education) {
+    return this.http
+      .post<Education>('http://localhost:8080/education/save', education)
+      .pipe(catchError(this.handleError));
+  }
+
+  editEducation(education: Education) {
+    return this.http
+      .put('http://localhost:8080/education/edit/' + education.id, education)
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteEducation(id: any) {
+    return this.http
+      .delete('http://localhost:8080/education/delete/' + id, {
+        responseType: 'text',
+      })
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
