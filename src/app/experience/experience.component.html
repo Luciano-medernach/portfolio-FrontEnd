@@ -6,7 +6,7 @@
       style="max-width: 540px"
       *ngFor="let exp of experience"
     >
-      <button (click)="deleteExperience(exp.id)">Eliminar</button>
+      <button (click)="deleteExperience(exp.id, exp.image)">Eliminar</button>
       <button
         data-bs-toggle="modal"
         data-bs-target="#experienceModal"
@@ -16,7 +16,7 @@
       </button>
       <div class="row g-0">
         <div class="col-md-4">
-          <img [src]="exp.image" class="img-fluid rounded-start" />
+          <img [src]="exp.retrievedImage" class="img-fluid rounded-start" />
         </div>
         <div class="col-md-8">
           <div class="card-body">
@@ -46,6 +46,7 @@
   class="modal"
   id="experienceModal"
   tabindex="-1"
+  enctype="multipart/form-data"
 >
   <div class="modal-dialog">
     <div class="modal-content">
@@ -112,16 +113,14 @@
           />
         </div>
         <div class="mb-3">
-          <label for="image" class="form-label">Imagen</label>
+          <label class="form-label">Imagen</label>
           <input
-            type="string"
+            (change)="handleChange($event)"
+            accept="image/jpeg,image/png"
+            type="file"
             class="form-control"
-            name="image"
-            aria-label="image"
-            id="image"
-            formControlName="image"
-            placeholder="image"
           />
+          <input type="hidden" formControlName="image" />
         </div>
       </div>
       <div class="modal-footer">

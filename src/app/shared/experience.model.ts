@@ -4,5 +4,6 @@ export interface Experience {
   description: string;
   date: any;
   employer: string;
-  image: string;
+  image: number | null;
+  retrievedImage?: string | null;
 }
